@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -41,6 +42,13 @@ const Navbar = () => {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
+  // Determine which index to highlight (hovered or active)
+  const activeIndex = navLinks.findIndex(link => 
+    (activeHash === link.href) || (!activeHash && link.href === "/")
+  );
+  
+  const displayIndex = hoveredIndex !== null ? hoveredIndex : (activeIndex !== -1 ? activeIndex : 0);
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -48,52 +56,90 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-black/60 backdrop-blur-md border-b border-white/10 py-3"
-          : "bg-transparent py-5"
+        scrolled ? "py-3" : "py-5"
       )}
     >
-      <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
+      <div className="container mx-auto px-6 md:px-12 flex items-center justify-between pointer-events-none">
+        {/* Logo Pill - Left Side */}
+        <div className="hidden md:flex logo-pill pointer-events-auto">
+          <Link
+            href="/"
+            className="logo-container group"
+            onClick={() => { closeMenu(); setActiveHash(""); }}
+          >
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500 group-hover:scale-110 transition-transform">
+              BG
+            </span>
+          </Link>
+        </div>
+
+        {/* Mobile BG Logo (Remains visible for branding) */}
         <Link
           href="/"
-          className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500"
+          className="md:hidden text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500 pointer-events-auto"
           onClick={() => { closeMenu(); setActiveHash(""); }}
         >
           BG
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => {
-            const isActive =
-              (activeHash === link.href) ||
-              (!activeHash && link.href === "/");
+        {/* Desktop Nav - Right Side */}
+        <div 
+          className="hidden md:flex nav-wrapper pointer-events-auto"
+          onMouseLeave={() => setHoveredIndex(null)}
+        >
+          <div className="nav-container">
+            {navLinks.map((link, index) => {
+              const isActive = activeIndex === index;
 
-            return (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={closeMenu}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-purple-400 relative",
-                  isActive ? "text-white" : "text-gray-400"
-                )}
-              >
-                {link.name}
-                {isActive && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-purple-500 rounded-full"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-              </a>
-            );
-          })}
-        </nav>
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onClick={closeMenu}
+                  className={cn(
+                    "nav-btn",
+                    isActive && "text-white"
+                  )}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
+          </div>
+          
+          <div className="nav-outline">
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 650 56"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="nav-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#a855f7" />
+                  <stop offset="100%" stopColor="#3b82f6" />
+                </linearGradient>
+              </defs>
+              <rect
+                x="1"
+                y="1"
+                width="648"
+                height="54"
+                rx="14"
+                className="nav-rect"
+                style={{
+                  strokeDasharray: "130 1282",
+                  strokeDashoffset: -displayIndex * 130
+                }}
+              />
+            </svg>
+          </div>
+        </div>
 
         {/* Mobile Toggle */}
-        <div className="md:hidden">
+        <div className="md:hidden pointer-events-auto">
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-gray-300 hover:text-white"
