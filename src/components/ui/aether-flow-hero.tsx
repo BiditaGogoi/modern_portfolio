@@ -176,7 +176,7 @@ const AetherFlowHero = () => {
                 duration: 0.8,
                 ease: "easeInOut",
             },
-        }),
+        } as any),
     };
 
     return (
@@ -204,7 +204,7 @@ const AetherFlowHero = () => {
                     animate="visible"
                     className="text-5xl md:text-8xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400"
                 >
-                    Hello, my name is BIDITA GOGOI
+                    BIDITA GOGOI
                 </motion.h1>
 
                 <motion.p
