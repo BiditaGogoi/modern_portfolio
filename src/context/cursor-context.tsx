@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState } from "react";
 
-type CursorType = "default" | "name-hover";
+type CursorType = "default" | "name-hover" | "hover";
 
 interface CursorContextType {
   cursorType: CursorType;

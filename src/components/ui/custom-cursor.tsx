@@ -35,6 +35,28 @@ const CustomCursor = () => {
                     translateY: "-50%",
                 }}
             />
+            
+            {/* Soft faded glow cursor for name hover */}
+            <motion.div
+                className="fixed top-0 left-0 rounded-full pointer-events-none z-[998] blur-xl opacity-0"
+                animate={{
+                    width: cursorType === "name-hover" ? 120 : 0,
+                    height: cursorType === "name-hover" ? 120 : 0,
+                    opacity: cursorType === "name-hover" ? 0.25 : 0,
+                    backgroundColor: cursorType === "name-hover" ? "rgba(168, 85, 247, 0.4)" : "transparent",
+                }}
+                transition={{
+                    type: "spring",
+                    stiffness: 150,
+                    damping: 20
+                }}
+                style={{
+                    x: cursorXSpring,
+                    y: cursorYSpring,
+                    translateX: "-50%",
+                    translateY: "-50%",
+                }}
+            />
         </>
     );
 };

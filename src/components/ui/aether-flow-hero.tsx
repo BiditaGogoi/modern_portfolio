@@ -1,20 +1,65 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { motion, useAnimationFrame, useMotionValue, animate } from 'framer-motion';
 import { ArrowRight, Zap } from 'lucide-react';
 
 // A utility function for class names
 const cn = (...classes: (string | undefined | null | false)[]) => classes.filter(Boolean).join(' ');
 
 import { useCursor } from "@/context/cursor-context";
+import { caslon } from "@/fonts";
+
+// A single character that responds to mouse proximity
+const ProximityCharacter = ({ char, mouseX, mouseY }: { char: string, mouseX: any, mouseY: any }) => {
+    const ref = useRef<HTMLSpanElement>(null);
+    const color = useMotionValue("rgba(255, 255, 255, 0.8)");
+    const isPurple = useRef(false);
+
+    useAnimationFrame(() => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const charX = rect.left + rect.width / 2;
+        const charY = rect.top + rect.height / 2;
+
+        const distance = Math.sqrt(
+            Math.pow(mouseX.get() - charX, 2) + 
+            Math.pow(mouseY.get() - charY, 2)
+        );
+
+        // If distance is less than 100px, glow a soft faded purple
+        if (distance < 100) {
+            if (!isPurple.current) {
+                isPurple.current = true;
+                animate(color, "rgba(216, 180, 254, 0.85)", { duration: 0.1 });
+            }
+        } else {
+            if (isPurple.current) {
+                isPurple.current = false;
+                animate(color, "rgba(255, 255, 255, 0.8)", { duration: 1.5 });
+            }
+        }
+    });
+
+    return (
+        <motion.span
+            ref={ref}
+            style={{ color }}
+            className="inline-block"
+        >
+            {char}
+        </motion.span>
+    );
+};
 
 // The main hero component
 const AetherFlowHero = () => {
-    const canvasRef = React.useRef<HTMLCanvasElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
     const { setCursorType } = useCursor();
+    const mouseX = useMotionValue(-1000);
+    const mouseY = useMotionValue(-1000);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
         
@@ -132,8 +177,8 @@ const AetherFlowHero = () => {
             }
         };
 
-        const animate = () => {
-            animationFrameId = requestAnimationFrame(animate);
+        const animateCanvas = () => {
+            animationFrameId = requestAnimationFrame(animateCanvas);
             if (!ctx) return;
             // Set the background color inside the canvas draw loop
             ctx.fillStyle = 'black';
@@ -148,18 +193,22 @@ const AetherFlowHero = () => {
         const handleMouseMove = (event: MouseEvent) => {
             mouse.x = event.clientX;
             mouse.y = event.clientY;
+            mouseX.set(event.clientX);
+            mouseY.set(event.clientY);
         };
         
         const handleMouseOut = () => {
             mouse.x = null;
             mouse.y = null;
+            mouseX.set(-1000);
+            mouseY.set(-1000);
         };
 
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mouseout', handleMouseOut);
 
         init();
-        animate();
+        animateCanvas();
 
         return () => {
             window.removeEventListener('resize', resizeCanvas);
@@ -167,7 +216,7 @@ const AetherFlowHero = () => {
             window.removeEventListener('mouseout', handleMouseOut);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [mouseX, mouseY]);
 
     const fadeUpVariants = {
         hidden: { opacity: 0, y: 20 },
@@ -192,10 +241,18 @@ const AetherFlowHero = () => {
                     variants={fadeUpVariants}
                     initial="hidden"
                     animate="visible"
-                    whileHover={{ scale: 1.02 }}
-                    className="text-5xl md:text-8xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 hover:from-purple-400 hover:to-blue-500 transition-all duration-500 cursor-default px-4"
+                    className={`${caslon.className} text-5xl md:text-8xl font-bold mb-6 cursor-default px-4 text-[rgba(255,255,255,0.8)] flex flex-wrap justify-center overflow-visible`}
                 >
-                    BIDITA GOGOI
+                    <div className="flex mr-[0.3em]">
+                        {"BIDITA".split("").map((char, i) => (
+                            <ProximityCharacter key={`b-${i}`} char={char} mouseX={mouseX} mouseY={mouseY} />
+                        ))}
+                    </div>
+                    <div className="flex">
+                        {"GOGOI".split("").map((char, i) => (
+                            <ProximityCharacter key={`g-${i}`} char={char} mouseX={mouseX} mouseY={mouseY} />
+                        ))}
+                    </div>
                 </motion.h1>
 
                 <motion.p
@@ -215,12 +272,20 @@ const AetherFlowHero = () => {
                     animate="visible"
                 >
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mx-auto max-w-lg">
-                        <button className="w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center gap-2 group">
+                        <button 
+                            className="w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center gap-2 group"
+                            onMouseEnter={() => setCursorType('hover')}
+                            onMouseLeave={() => setCursorType('default')}
+                        >
                             Explore my projects
                             <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                         </button>
                         
-                        <button className="w-full sm:w-auto px-8 py-4 bg-white/5 text-white font-semibold rounded-lg border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2 group">
+                        <button 
+                            className="w-full sm:w-auto px-8 py-4 bg-white/5 text-white font-semibold rounded-lg border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2 group"
+                            onMouseEnter={() => setCursorType('hover')}
+                            onMouseLeave={() => setCursorType('default')}
+                        >
                             Resume
                             <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
                         </button>
