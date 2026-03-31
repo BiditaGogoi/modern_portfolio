@@ -271,13 +271,32 @@ const AetherFlowHero = () => {
                     initial="hidden"
                     animate="visible"
                 >
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mx-auto max-w-2xl mt-4">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mx-auto w-full mt-4">
                         <motion.button 
                             onClick={() => {
                                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className="animated-button relative flex items-center justify-center gap-2 w-auto px-10 py-3 border-2 border-white/30 bg-gradient-to-br from-purple-950/60 via-purple-900/40 to-blue-950/60 rounded-full font-bold text-white cursor-pointer overflow-hidden transition-all duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-xl hover:bg-white hover:text-blue-950 hover:border-white hover:shadow-[0_0_30px_rgba(191,128,255,0.4)] backdrop-blur-md group text-sm"
+                            animate={{ 
+                                borderRadius: "9999px",
+                                backgroundColor: "rgba(10, 10, 10, 0)", // Transparent-ish to show gradient
+                                color: "white",
+                                borderColor: "rgba(255, 255, 255, 0.3)"
+                            }}
+                            whileHover={{ 
+                                borderRadius: "12px",
+                                backgroundColor: "white",
+                                color: "#1e3a8a",
+                                borderColor: "white",
+                                boxShadow: "0 0 30px rgba(191,128,255,0.4)"
+                            }}
+                            transition={{ 
+                                duration: 0.5, 
+                                ease: [0.65, 0, 0.35, 1],
+                                borderRadius: { duration: 0.5 },
+                                backgroundColor: { duration: 0.5 }
+                            }}
+                            className="animated-button relative flex items-center justify-center gap-2 w-auto px-10 py-3 border-2 bg-gradient-to-br from-purple-950/60 via-purple-900/40 to-blue-950/60 font-bold cursor-pointer overflow-hidden backdrop-blur-md group text-sm"
                             onMouseEnter={() => setCursorType('hover')}
                             onMouseLeave={() => setCursorType('default')}
                         >
@@ -298,7 +317,7 @@ const AetherFlowHero = () => {
                                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className="group relative inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-br from-blue-950/50 via-blue-900/30 to-blue-850/50 backdrop-blur-sm border border-white/10 text-white font-bold rounded-full transition-all duration-300 hover:bg-blue-400 hover:text-black hover:border-blue-400 hover:shadow-[0_0_25px_rgba(96,165,250,0.4)] overflow-hidden text-sm w-auto"
+                            className="group relative inline-flex items-center gap-3 px-6 pt-[10px] pb-[12px] bg-gradient-to-br from-blue-950/50 via-blue-900/30 to-blue-850/50 backdrop-blur-sm border border-white/10 text-white font-bold rounded-full transition-all duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] hover:bg-blue-400 hover:text-black hover:border-blue-400 hover:shadow-[0_0_25px_rgba(96,165,250,0.4)] overflow-hidden text-sm w-auto"
                             onMouseEnter={() => setCursorType('hover')}
                             onMouseLeave={() => setCursorType('default')}
                         >
