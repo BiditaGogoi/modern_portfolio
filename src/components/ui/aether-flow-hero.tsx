@@ -13,7 +13,7 @@ import { caslon } from "@/fonts";
 // A single character that responds to mouse proximity
 const ProximityCharacter = ({ char, mouseX, mouseY }: { char: string, mouseX: any, mouseY: any }) => {
     const ref = useRef<HTMLSpanElement>(null);
-    const color = useMotionValue("rgba(255, 255, 255, 0.8)");
+    const color = useMotionValue("rgba(255, 255, 255, 0.85)");
     const isPurple = useRef(false);
 
     useAnimationFrame(() => {
@@ -36,7 +36,7 @@ const ProximityCharacter = ({ char, mouseX, mouseY }: { char: string, mouseX: an
         } else {
             if (isPurple.current) {
                 isPurple.current = false;
-                animate(color, "rgba(255, 255, 255, 0.8)", { duration: 1.5 });
+                animate(color, "rgba(255, 255, 255, 0.85)", { duration: 1.5 });
             }
         }
     });
@@ -241,7 +241,7 @@ const AetherFlowHero = () => {
                     variants={fadeUpVariants}
                     initial="hidden"
                     animate="visible"
-                    className={`${caslon.className} text-5xl md:text-8xl font-bold mb-6 cursor-default px-4 text-[rgba(255,255,255,0.8)] flex flex-wrap justify-center overflow-visible`}
+                    className={`${caslon.className} text-4xl md:text-8xl font-bold mb-6 cursor-default px-4 text-[rgba(255,255,255,0.85)] flex flex-wrap justify-center overflow-visible`}
                 >
                     <div className="flex mr-[0.3em]">
                         {"BIDITA".split("").map((char, i) => (

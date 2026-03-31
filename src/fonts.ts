@@ -1,4 +1,7 @@
-import { Outfit, Libre_Caslon_Display } from "next/font/google";
+import { 
+    Outfit, 
+    Libre_Caslon_Text 
+} from "next/font/google";
 
 export const outfit = Outfit({ 
     subsets: ["latin"], 
@@ -6,8 +9,8 @@ export const outfit = Outfit({
     variable: "--font-outfit"
 });
 
-export const caslon = Libre_Caslon_Display({ 
+export const caslon = Libre_Caslon_Text({ 
     subsets: ["latin"], 
-    weight: ["400"],
+    weight: ["400", "700"],
     variable: "--font-caslon"
 });
