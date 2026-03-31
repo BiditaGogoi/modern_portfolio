@@ -45,8 +45,8 @@ html {
 /* Uiverse Animated Navbar */
 .nav-wrapper {
   position: relative;
-  width: 650px;
-  height: 56px;
+  width: 450px;
+  height: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,8 +54,8 @@ html {
 
 .logo-pill {
   position: relative;
-  width: 70px;
-  height: 56px;
+  width: 54px;
+  height: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +70,7 @@ html {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
+  border-radius: 12px;
   transition: 0.3s;
 }
 
@@ -80,23 +80,6 @@ html {
   transform: translateY(-1px);
 }
 
-.nav-outline {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.nav-rect {
-  stroke-dasharray: 9.2 90.8;
-  stroke-dashoffset: 0;
-  transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  stroke: url(#nav-gradient);
-  stroke-width: 3;
-  fill: transparent;
-  stroke-linecap: round;
-}
-
 .nav-container {
   display: flex;
   width: 100%;
@@ -104,12 +87,21 @@ html {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding: 0 0.5rem;
+  padding: 0 0.4rem;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
+  border-radius: 10px;
   position: relative;
+}
+
+.nav-dot {
+  position: absolute;
+  bottom: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  z-index: 5;
 }
 
 .nav-btn {
@@ -122,7 +114,7 @@ html {
   cursor: pointer;
   transition: color 0.3s;
   z-index: 10;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
 }
 

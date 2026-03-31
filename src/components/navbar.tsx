@@ -47,7 +47,17 @@ const Navbar = () => {
     (activeHash === link.href) || (!activeHash && link.href === "/")
   );
   
+  // Define theme colors for each nav item (Avoiding Orange as requested)
+  const NAV_COLORS = [
+    "#d8b4fe", // Home: Light Purple
+    "#93c5fd", // About Me: Light Blue
+    "#818cf8", // Skills: Indigo
+    "#22d3ee", // Projects: Cyan
+    "#f472b6", // Contact: Pink
+  ];
+
   const displayIndex = hoveredIndex !== null ? hoveredIndex : (activeIndex !== -1 ? activeIndex : 0);
+  const displayColor = NAV_COLORS[displayIndex];
 
   return (
     <motion.header
@@ -59,7 +69,7 @@ const Navbar = () => {
         scrolled ? "py-3" : "py-5"
       )}
     >
-      <div className="container mx-auto px-6 md:px-12 flex items-center justify-between pointer-events-none">
+      <div className="w-full px-6 md:px-16 flex items-center justify-between pointer-events-none">
         {/* Logo Pill - Left Side */}
         <div className="hidden md:flex logo-pill pointer-events-auto">
           <Link
@@ -83,13 +93,15 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav - Right Side */}
-        <div 
-          className="hidden md:flex nav-wrapper pointer-events-auto"
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
-          <div className="nav-container">
+        <div className="hidden md:flex nav-wrapper pointer-events-auto">
+          <div 
+            className="nav-container"
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
             {navLinks.map((link, index) => {
               const isActive = activeIndex === index;
+              const isHovered = hoveredIndex === index;
+              const itemColor = (isActive || isHovered) ? NAV_COLORS[index] : "#94a3b8";
 
               return (
                 <a
@@ -97,44 +109,32 @@ const Navbar = () => {
                   href={link.href}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onClick={closeMenu}
-                  className={cn(
-                    "nav-btn",
-                    isActive && "text-white"
-                  )}
+                  className="nav-btn transition-colors duration-500"
+                  style={{ color: itemColor }}
                 >
                   {link.name}
                 </a>
               );
             })}
-          </div>
-          
-          <div className="nav-outline">
-            <svg
-              width="100%"
-              height="100%"
-              viewBox="0 0 650 56"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="nav-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#a855f7" />
-                  <stop offset="100%" stopColor="#3b82f6" />
-                </linearGradient>
-              </defs>
-              <rect
-                x="1"
-                y="1"
-                width="648"
-                height="54"
-                rx="14"
-                className="nav-rect"
-                style={{
-                  strokeDasharray: "130 1282",
-                  strokeDashoffset: -displayIndex * 130
-                }}
-              />
-            </svg>
+
+            {/* Sliding Dot Indicator */}
+            <motion.div
+              className="nav-dot"
+              style={{
+                background: displayColor,
+                boxShadow: `0 0 12px ${displayColor}80, 0 0 24px ${displayColor}40`
+              }}
+              animate={{
+                left: `${(displayIndex * 20) + 10}%`,
+                translateX: "-50%",
+                scale: hoveredIndex !== null ? 1.2 : 1
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 30,
+              }}
+            />
           </div>
         </div>
 
