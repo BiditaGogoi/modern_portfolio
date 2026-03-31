@@ -7,9 +7,12 @@ import { ArrowRight, Zap } from 'lucide-react';
 // A utility function for class names
 const cn = (...classes: (string | undefined | null | false)[]) => classes.filter(Boolean).join(' ');
 
+import { useCursor } from "@/context/cursor-context";
+
 // The main hero component
 const AetherFlowHero = () => {
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
+    const { setCursorType } = useCursor();
 
     React.useEffect(() => {
         const canvas = canvasRef.current;
@@ -184,25 +187,13 @@ const AetherFlowHero = () => {
             <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full"></canvas>
             
             <div className="relative z-10 text-center p-6">
-                <motion.div
-                    custom={0}
-                    variants={fadeUpVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6 backdrop-blur-sm"
-                >
-                    <Zap className="h-4 w-4 text-purple-400" />
-                    <span className="text-sm font-medium text-gray-200">
-                        Dynamic Rendering Engine
-                    </span>
-                </motion.div>
-
                 <motion.h1
                     custom={1}
                     variants={fadeUpVariants}
                     initial="hidden"
                     animate="visible"
-                    className="text-5xl md:text-8xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400"
+                    whileHover={{ scale: 1.02 }}
+                    className="text-5xl md:text-8xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 hover:from-purple-400 hover:to-blue-500 transition-all duration-500 cursor-default px-4"
                 >
                     BIDITA GOGOI
                 </motion.h1>
@@ -223,10 +214,17 @@ const AetherFlowHero = () => {
                     initial="hidden"
                     animate="visible"
                 >
-                    <button className="px-8 py-4 bg-white text-black font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition-colors duration-300 flex items-center gap-2 mx-auto">
-                        Explore the Engine
-                        <ArrowRight className="h-5 w-5" />
-                    </button>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mx-auto max-w-lg">
+                        <button className="w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center gap-2 group">
+                            Explore my projects
+                            <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                        </button>
+                        
+                        <button className="w-full sm:w-auto px-8 py-4 bg-white/5 text-white font-semibold rounded-lg border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2 group">
+                            Resume
+                            <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+                        </button>
+                    </div>
                 </motion.div>
             </div>
         </div>

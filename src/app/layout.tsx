@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   description: "B.Tech 1st Year | Passionate Developer | Tech Enthusiast",
 };
 
+import { CursorProvider } from "@/context/cursor-context";
+import CustomCursor from "@/components/ui/custom-cursor";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -18,8 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body className={`${inter.className} bg-black text-white antialiased`}>
-        <Navbar />
-        {children}
+        <CursorProvider>
+          <Navbar />
+          <CustomCursor />
+          {children}
+        </CursorProvider>
       </body>
     </html>
   );
