@@ -27,7 +27,7 @@ export default function SkillsSection() {
               Expertise
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500 mb-6">
+          <h2 className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500 mb-6 tracking-tight">
             Technical Skills
           </h2>
           <p className="text-gray-400 text-lg mb-12 max-w-2xl">

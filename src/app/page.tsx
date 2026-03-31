@@ -12,7 +12,7 @@ export default function Home() {
       <AetherFlowHero />
       
       {/* About Section */}
-      <section id="about" className="py-24 relative overflow-hidden">
+      <section id="about" className="py-24 relative overflow-hidden bg-black text-white">
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
 
@@ -25,7 +25,7 @@ export default function Home() {
               </span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500 tracking-tight text-white uppercase sm:normal-case">
               Future Software Engineer
             </h2>
             

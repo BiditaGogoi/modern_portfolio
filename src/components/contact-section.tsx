@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { caslon } from "@/fonts";
 import { Mail, Link, Code2, Send } from "lucide-react";
 import React, { useState } from "react";
 
@@ -30,7 +31,7 @@ export default function ContactSection() {
               Reach Out
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500 mb-6">
+          <h2 className={`${caslon.className} text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500 mb-6`}>
             Get In Touch
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">

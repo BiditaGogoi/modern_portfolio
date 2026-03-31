@@ -180,7 +180,7 @@ const AetherFlowHero = () => {
         const animateCanvas = () => {
             animationFrameId = requestAnimationFrame(animateCanvas);
             if (!ctx) return;
-            // Set the background color inside the canvas draw loop
+            // Set the background color to solid black as requested
             ctx.fillStyle = 'black';
             ctx.fillRect(0, 0, innerWidth, innerHeight);
 
@@ -241,7 +241,7 @@ const AetherFlowHero = () => {
                     variants={fadeUpVariants}
                     initial="hidden"
                     animate="visible"
-                    className={`${caslon.className} text-4xl md:text-8xl font-bold mb-6 cursor-default px-4 text-[rgba(255,255,255,0.85)] flex flex-wrap justify-center overflow-visible`}
+                    className={`${caslon.className} text-5xl md:text-8xl font-bold mb-6 cursor-default px-4 text-white flex flex-wrap justify-center overflow-visible tracking-tight`}
                 >
                     <div className="flex mr-[0.3em]">
                         {"BIDITA".split("").map((char, i) => (
@@ -271,24 +271,45 @@ const AetherFlowHero = () => {
                     initial="hidden"
                     animate="visible"
                 >
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mx-auto max-w-lg">
-                        <button 
-                            className="w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center gap-2 group"
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mx-auto max-w-2xl mt-4">
+                        <motion.button 
+                            onClick={() => {
+                                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            className="animated-button relative flex items-center justify-center gap-2 w-full sm:w-52 py-3 border-2 border-white/30 bg-gradient-to-br from-purple-950/60 via-purple-900/40 to-blue-950/60 rounded-[30px] font-bold text-white cursor-pointer overflow-hidden transition-all duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-xl hover:bg-white hover:text-blue-950 hover:border-white hover:shadow-[0_0_30px_rgba(191,128,255,0.4)] backdrop-blur-md group text-sm"
                             onMouseEnter={() => setCursorType('hover')}
                             onMouseLeave={() => setCursorType('default')}
                         >
-                            Explore my projects
-                            <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                        </button>
+                            {/* Arrow 1 (Starts inside, moves out to right) */}
+                            <ArrowRight className="absolute right-3 w-4 h-4 text-white z-10 group-hover:translate-x-10 group-hover:opacity-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-blue-950" />
+
+                            {/* Arrow 2 (Starts outside left, moves in to 16px) */}
+                            <ArrowRight className="absolute -left-10 w-4 h-4 text-white z-10 group-hover:left-3 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] opacity-0 group-hover:text-blue-950" />
+
+                            {/* Button Text (Shifts right) */}
+                            <span className="relative z-10 translate-x-0 group-hover:translate-x-3 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
+                                Projects
+                            </span>
+                        </motion.button>
                         
-                        <button 
-                            className="w-full sm:w-auto px-8 py-4 bg-white/5 text-white font-semibold rounded-lg border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2 group"
+                        <motion.button 
+                            onClick={() => {
+                                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            className="group relative inline-flex items-center justify-between w-full sm:w-52 px-5 py-3 bg-gradient-to-br from-blue-950/50 via-blue-900/30 to-blue-850/50 backdrop-blur-sm border border-white/10 text-white font-bold rounded-full transition-all duration-300 hover:bg-blue-400 hover:text-black hover:border-blue-400 hover:shadow-[0_0_25px_rgba(96,165,250,0.4)] overflow-hidden text-sm"
                             onMouseEnter={() => setCursorType('hover')}
                             onMouseLeave={() => setCursorType('default')}
                         >
-                            Resume
-                            <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
-                        </button>
+                            <span className="relative z-10 pl-1">Resume</span>
+                            <div className="relative flex-shrink-0 w-7 h-7 bg-white/10 group-hover:bg-black rounded-full flex items-center justify-center overflow-hidden transition-colors duration-300 backdrop-blur-md border border-white/10 group-hover:border-transparent">
+                                {/* Icon 1: Slides out top-right */}
+                                <Zap className="w-3.5 h-3.5 text-white group-hover:text-blue-400 absolute transition-transform duration-300 ease-in-out group-hover:translate-x-[150%] group-hover:-translate-y-[150%]" />
+                                {/* Icon 2: Slides in from bottom-left */}
+                                <Zap className="w-3.5 h-3.5 text-white group-hover:text-blue-400 absolute transition-transform duration-300 ease-in-out -translate-x-[150%] translate-y-[150%] group-hover:translate-x-0 group-hover:translate-y-0" />
+                            </div>
+                        </motion.button>
                     </div>
                 </motion.div>
             </div>
