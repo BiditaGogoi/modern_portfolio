@@ -277,19 +277,19 @@ const AetherFlowHero = () => {
                                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className="animated-button relative flex items-center justify-center gap-2 w-full sm:w-52 py-3 border-2 border-white/30 bg-gradient-to-br from-purple-950/60 via-purple-900/40 to-blue-950/60 rounded-[30px] font-bold text-white cursor-pointer overflow-hidden transition-all duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-xl hover:bg-white hover:text-blue-950 hover:border-white hover:shadow-[0_0_30px_rgba(191,128,255,0.4)] backdrop-blur-md group text-sm"
+                            className="animated-button relative flex items-center justify-center gap-2 w-auto px-10 py-3 border-2 border-white/30 bg-gradient-to-br from-purple-950/60 via-purple-900/40 to-blue-950/60 rounded-full font-bold text-white cursor-pointer overflow-hidden transition-all duration-600 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-xl hover:bg-white hover:text-blue-950 hover:border-white hover:shadow-[0_0_30px_rgba(191,128,255,0.4)] backdrop-blur-md group text-sm"
                             onMouseEnter={() => setCursorType('hover')}
                             onMouseLeave={() => setCursorType('default')}
                         >
                             {/* Arrow 1 (Starts inside, moves out to right) */}
-                            <ArrowRight className="absolute right-3 w-4 h-4 text-white z-10 group-hover:translate-x-10 group-hover:opacity-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-blue-950" />
+                            <ArrowRight className="absolute right-4 w-5 h-5 text-white z-10 group-hover:translate-x-12 group-hover:opacity-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-blue-950" />
 
                             {/* Arrow 2 (Starts outside left, moves in to 16px) */}
-                            <ArrowRight className="absolute -left-10 w-4 h-4 text-white z-10 group-hover:left-3 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] opacity-0 group-hover:text-blue-950" />
+                            <ArrowRight className="absolute -left-10 w-5 h-5 text-white z-10 group-hover:left-4 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] opacity-0 group-hover:text-blue-950" />
 
                             {/* Button Text (Shifts right) */}
-                            <span className="relative z-10 translate-x-0 group-hover:translate-x-3 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
-                                Projects
+                            <span className="relative z-10 translate-x-0 group-hover:translate-x-4 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
+                                My work
                             </span>
                         </motion.button>
                         
@@ -298,11 +298,11 @@ const AetherFlowHero = () => {
                                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className="group relative inline-flex items-center justify-between w-full sm:w-52 px-5 py-3 bg-gradient-to-br from-blue-950/50 via-blue-900/30 to-blue-850/50 backdrop-blur-sm border border-white/10 text-white font-bold rounded-full transition-all duration-300 hover:bg-blue-400 hover:text-black hover:border-blue-400 hover:shadow-[0_0_25px_rgba(96,165,250,0.4)] overflow-hidden text-sm"
+                            className="group relative inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-br from-blue-950/50 via-blue-900/30 to-blue-850/50 backdrop-blur-sm border border-white/10 text-white font-bold rounded-full transition-all duration-300 hover:bg-blue-400 hover:text-black hover:border-blue-400 hover:shadow-[0_0_25px_rgba(96,165,250,0.4)] overflow-hidden text-sm w-auto"
                             onMouseEnter={() => setCursorType('hover')}
                             onMouseLeave={() => setCursorType('default')}
                         >
-                            <span className="relative z-10 pl-1">Resume</span>
+                            <span className="relative z-10 pl-2">Resume</span>
                             <div className="relative flex-shrink-0 w-7 h-7 bg-white/10 group-hover:bg-black rounded-full flex items-center justify-center overflow-hidden transition-colors duration-300 backdrop-blur-md border border-white/10 group-hover:border-transparent">
                                 {/* Icon 1: Slides out top-right */}
                                 <Zap className="w-3.5 h-3.5 text-white group-hover:text-blue-400 absolute transition-transform duration-300 ease-in-out group-hover:translate-x-[150%] group-hover:-translate-y-[150%]" />
