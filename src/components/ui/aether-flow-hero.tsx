@@ -255,14 +255,14 @@ const AetherFlowHero = () => {
                     </div>
                 </motion.h1>
 
-                <motion.p
+                <motion.p 
                     custom={2}
                     variants={fadeUpVariants}
                     initial="hidden"
                     animate="visible"
-                    className="max-w-2xl mx-auto text-lg text-gray-400 mb-10"
+                    className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium"
                 >
-                    B.Tech 1st Year | Passionate Developer | Tech Enthusiast
+                    B.Tech 1st Year | Frontend Developer | Interactive Experiences
                 </motion.p>
 
                 <motion.div
