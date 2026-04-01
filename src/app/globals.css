@@ -54,30 +54,25 @@ html {
 
 .logo-pill {
   position: relative;
-  width: 54px;
+  width: auto;
   height: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 12px;
 }
 
 .logo-container {
   display: flex;
-  width: 100%;
-  height: 100%;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  width: 100%;
+  height: 100%;
 }
 
 .logo-container:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2); /* Purple glow */
 }
 
 .nav-container {
@@ -88,11 +83,12 @@ html {
   justify-content: space-around;
   align-items: center;
   padding: 0 0.4rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-container:hover {
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.2); /* Blue glow */
 }
 
 .nav-dot {

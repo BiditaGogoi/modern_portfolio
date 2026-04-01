@@ -241,8 +241,11 @@ const AetherFlowHero = () => {
                     variants={fadeUpVariants}
                     initial="hidden"
                     animate="visible"
-                    className={`${caslon.className} text-5xl md:text-8xl font-bold mb-6 cursor-default px-4 text-white flex flex-wrap justify-center overflow-visible tracking-tight`}
+                    className={`${caslon.className} relative text-5xl md:text-8xl font-bold mb-6 cursor-default px-4 text-white flex flex-wrap justify-center overflow-visible tracking-tight`}
                 >
+                    {/* Atmospheric Glow behind the name */}
+                    <div className="absolute -inset-x-10 md:-inset-x-20 top-1/2 -translate-y-1/2 h-full bg-gradient-to-r from-transparent via-purple-500/15 to-transparent blur-[80px] md:blur-[120px] pointer-events-none -z-10" />
+                    
                     <div className="flex mr-[0.3em]">
                         {"BIDITA".split("").map((char, i) => (
                             <ProximityCharacter key={`b-${i}`} char={char} mouseX={mouseX} mouseY={mouseY} />
@@ -262,7 +265,7 @@ const AetherFlowHero = () => {
                     animate="visible"
                     className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium"
                 >
-                    B.Tech 1st Year | Frontend Developer | Interactive Experiences
+                    Passionate about building modern and interactive web experiences
                 </motion.p>
 
                 <motion.div
